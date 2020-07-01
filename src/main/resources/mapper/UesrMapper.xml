@@ -6,7 +6,7 @@
         select * from user where account = #{account}
     </select>
 
-    <insert id="createUserByID" parameterType="com.abcsh.exercise.statement.entity.User">
-        insert into statement values(#{account},#{name},#{password})
+    <insert id="createUserByID" parameterType="com.abcsh.exercise.statement.entity.User" useGeneratedKeys="true" keyProperty="id">
+        insert into user (account,password,name) values (#{account},#{password},#{name})
     </insert>
 </mapper>

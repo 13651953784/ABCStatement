@@ -25,7 +25,7 @@ public class UserController {
 
     //实现注册
     @PostMapping("")
-    public Result Register(@RequestBody User user){
+    public Result register(@RequestBody User user){
         return userService.Register(user);
     }
 

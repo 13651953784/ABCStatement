@@ -26,13 +26,18 @@ public class UserService {
 
     //实现注册功能
     public Result Register(User user) {
-        if (null != userMapper.getUserByAccount(user.getAccount()))
-            return new Result(false,String.format("%{%s}",user.getAccount()));
-        try{
-            userMapper.createUserByID(user);
-        }catch (Exception e){
-            return new Result(false,e.getMessage());
+       // System.out.println("**************"+user.getAccount());
+
+        if (null == userMapper.getUserByAccount(user.getAccount())){
+            try{
+                userMapper.createUserByID(user);
+            }catch (Exception e){
+                return new Result(false,e.getMessage());
+            }
+            return new Result(true,String.format("%s",user.getAccount()));
+        }else{
+            return new Result(false,String.format("%s已经被注册！",user.getAccount()));
         }
-        return new Result(true,"");
+
     }
 }
