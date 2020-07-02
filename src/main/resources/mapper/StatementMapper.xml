@@ -15,7 +15,7 @@
         <result column="reporter" jdbcType="VARCHAR" property="reporter"/>
     </resultMap>
 <!--模糊查询-->
-    <select id="" resultMap="" parameterType="">
+    <select id="rangeFindByDate" resultMap="" parameterType="">
         select sql_calc_found_rows
             a.id,
             a.date,
