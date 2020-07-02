@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abcsh.exercise.statement.mapper.UserMapper">
+    <resultMap id="countMap" type="Integer">
+        <result column="count" jdbcType="INTEGER" javaType="Integer"/>
+    </resultMap>
+
+    <resultMap id="statementMap" type="com.abcsh.exercise.statement.entity.Statement">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="attachment" jdbcType="VARCHAR" property="attachment"/>
+        <result column="time_stamp" jdbcType="VARCHAR" property="time_stamp"/>
+        <result column="date" jdbcType="VARCHAR" property="date"/>
+        <result column="reporter" jdbcType="VARCHAR" property="reporter"/>
+    </resultMap>
+<!--模糊查询-->
+    <select id="" resultMap="" parameterType="">
+        select sql_calc_found_rows
+            a.id,
+            a.date,
+            a.title,
+            a.content,
+            a,content,
+            a.attachment,
+            b.name as reporter,
+            a.time_stamp
+        from statement a,user b
+        <where>
+            a.reporter=b.account
+            <if test="beginDate!=null and overDate != null">
+               1=1 AND a.date >= #{beginDate} AND a.date &lt;= #{overDate}
+            </if>
+        </where>
+        select found_rows() as count;
+    </select>
+
+<!--精确查询-->
+    <select id="retrieveStatementBySingleDate" resultMap="" parameterType="">
+        select sql_calc_found_rows
+        a.id,
+        a.date,
+        a.title,
+        a.content,
+        a,content,
+        a.attachment,
+        b.name as reporter,
+        a.time_stamp
+        from statement a,user b
+        <where>
+            a.reporter=b.account
+            <if test="singleDate!=null">
+                and a.date = #{singleDate}
+            </if>
+        </where>
+    </select>
+<!--新增-->
+    <insert id="createStatement" parameterType="com.abcsh.exercise.statement.entity.Statement">
+        insert into statement
+        (
+            date,
+            title,
+            content,
+            attachment,
+            reporter
+        )
+        values
+        (
+            #{date},
+            #{title},
+            #{content},
+            #{attachment},
+            #{reporter}
+        )
+    </insert>
+<!--删除-->
+    <delete id="" parameterType="int">
+        delete from statement where id = #{id}
+    </delete>
+<!--编辑-->
+    <update id="updateStatementById" parameterType="">
+        update statement
+        <trim prefix="set" suffixOverrides=",">
+            <if test="date != null">date = #{date},</if>
+            <if test="title != null">date = #{title},</if>
+            <if test="content != null">date = #{content},</if>
+            <if test="attachment != null">date = #{attachment},</if>
+            <if test="reporter != null">date = #{reporter}</if>
+        </trim>
+    </update>
+
+
+</mapper>
