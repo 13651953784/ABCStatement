@@ -6,10 +6,7 @@ import com.abcsh.exercise.statement.entity.Statement;
 import com.abcsh.exercise.statement.service.StatementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @program: Statement
@@ -38,9 +35,9 @@ public class StatementController {
         return statementService.retrieveStatementListBySingleDate(singleDate,currentPage,pageSize);
     }
 //新增
-/*    @GetMapping("/")
-    Result createStatement(){
+    @PostMapping("")
+    Result createStatement(@RequestBody Statement statement){
 
-        return new Result();
-    }*/
+        return statementService.createStatement(statement);
+    }
 }

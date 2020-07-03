@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -53,12 +54,24 @@ public class StatementService {
     }
 
     //新增
-/*    Result createStatement(Statement statement) {
-//这个user 应该怎么理解
-       User user = (User)request.getSession().getAttribute("user");
-        if(null != user)
+    public Result createStatement(Statement statement) {
+      try {
+          User user = (User) request.getSession().getAttribute("user");
+          if (null != user) {
+              Date date = new Date();
+              SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
-    }*/
+              String date_Str = f.format(date);
+
+              statement.setTimeStamp(new Date(date_Str));
+              statement.setReporter(user.getAccount());
+          }
+          statementMapper.createStatement(statement);
+      }catch (Exception e) {
+          return new Result(false,e.getMessage());
+      }
+      return new Result(true,"");
+    }
 
     //删除
     void deleteStatementById(int id) {
