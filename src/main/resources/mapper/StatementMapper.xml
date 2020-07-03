@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.abcsh.exercise.statement.mapper.UserMapper">
+<mapper namespace="com.abcsh.exercise.statement.mapper.StatementMapper">
+<!--绑定后就可以定义返回值类型-->
     <resultMap id="countMap" type="Integer">
         <result column="count" jdbcType="INTEGER" javaType="Integer"/>
     </resultMap>
@@ -10,18 +11,18 @@
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="attachment" jdbcType="VARCHAR" property="attachment"/>
-        <result column="time_stamp" jdbcType="VARCHAR" property="time_stamp"/>
+        <result column="time_stamp" jdbcType="VARCHAR" property="timeStamp"/>
         <result column="date" jdbcType="VARCHAR" property="date"/>
         <result column="reporter" jdbcType="VARCHAR" property="reporter"/>
     </resultMap>
+
 <!--模糊查询-->
-    <select id="rangeFindByDate" resultMap="" parameterType="">
+    <select id="retrieveStatementListByRangeDate" resultMap="statementMap,countMap" parameterType="String">
         select sql_calc_found_rows
             a.id,
             a.date,
             a.title,
             a.content,
-            a,content,
             a.attachment,
             b.name as reporter,
             a.time_stamp
@@ -29,23 +30,23 @@
         <where>
             a.reporter=b.account
             <if test="beginDate!=null and overDate != null">
-               1=1 AND a.date >= #{beginDate} AND a.date &lt;= #{overDate}
+               and a.date &gt;= #{beginDate} AND a.date &lt;=   #{overDate}
             </if>
         </where>
+        limit #{start},#{limit};
         select found_rows() as count;
     </select>
 
 <!--精确查询-->
-    <select id="retrieveStatementBySingleDate" resultMap="" parameterType="">
+    <select id="retrieveStatementListBySingleDate" resultMap="statementMap,countMap" parameterType="String">
         select sql_calc_found_rows
-        a.id,
-        a.date,
-        a.title,
-        a.content,
-        a,content,
-        a.attachment,
-        b.name as reporter,
-        a.time_stamp
+            a.id,
+            a.date,
+            a.title,
+            a.content,
+            a.attachment,
+            b.name as reporter,
+            a.time_stamp
         from statement a,user b
         <where>
             a.reporter=b.account
@@ -53,6 +54,24 @@
                 and a.date = #{singleDate}
             </if>
         </where>
+        limit #{start},#{limit};
+        select found_rows() as count;
+    </select>
+<!--id查询-->
+    <select id="retrieveStatementById" resultType="com.abcsh.exercise.statement.entity.Statement">
+        select
+            a.id,
+            a.date,
+            a.title,
+            a.content,
+            a.attachment,
+            b.name as reporter,
+            a.time_stamp
+        from statement a,user b
+        where
+            a.reporter=b.account
+        and
+            id = #{id}
     </select>
 <!--新增-->
     <insert id="createStatement" parameterType="com.abcsh.exercise.statement.entity.Statement">
@@ -74,11 +93,11 @@
         )
     </insert>
 <!--删除-->
-    <delete id="" parameterType="int">
+    <delete id="deleteStatementById" parameterType="int">
         delete from statement where id = #{id}
     </delete>
 <!--编辑-->
-    <update id="updateStatementById" parameterType="">
+    <update id="updateStatementById" parameterType="com.abcsh.exercise.statement.entity.Statement">
         update statement
         <trim prefix="set" suffixOverrides=",">
             <if test="date != null">date = #{date},</if>
