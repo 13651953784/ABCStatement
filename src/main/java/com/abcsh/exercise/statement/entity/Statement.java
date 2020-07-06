@@ -16,7 +16,7 @@ public class Statement {
     private String content;
     private String attachment;
     private String reporter;
-    private Date timeStamp;
+    private String timeStamp;
 
     public int getId() {
         return id;
@@ -66,11 +66,11 @@ public class Statement {
         this.reporter = reporter;
     }
 
-    public Date getTimeStamp() {
+    public String getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(Date timeStamp) {
+    public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
     }
 
@@ -83,7 +83,7 @@ public class Statement {
                 ", content='" + content + '\'' +
                 ", attachment='" + attachment + '\'' +
                 ", reporter='" + reporter + '\'' +
-                ", timeStamp=" + timeStamp +
+                ", timeStamp='" + timeStamp + '\'' +
                 '}';
     }
 }

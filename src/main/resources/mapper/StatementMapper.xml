@@ -74,24 +74,24 @@
             id = #{id}
     </select>
 <!--新增-->
-    <insert id="createStatement" parameterType="com.abcsh.exercise.statement.entity.Statement">
+    <insert id="createStatement" parameterType="com.abcsh.exercise.statement.entity.Statement" useGeneratedKeys="true" keyProperty="id">
         insert into statement
         (
-            id,
             date,
             title,
             content,
             attachment,
-            reporter
+            reporter,
+            time_stamp
         )
         values
         (
-            ,
             #{date},
             #{title},
             #{content},
             #{attachment},
-            #{reporter}
+            #{reporter},
+            #{timeStamp}
         )
     </insert>
 <!--删除-->

@@ -57,18 +57,13 @@ public class StatementService {
     public Result createStatement(Statement statement) {
       try {
           User user = (User) request.getSession().getAttribute("user");
-          System.out.println("1*****************"+statement);
-          if (null != user) {
-              Date date = new Date();
-              SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-
-              String date_Str = f.format(date);
-
-              statement.setTimeStamp(new Date(date_Str));
-              statement.setReporter(user.getAccount());
-              System.out.println("2*****************"+statement);
-          }
+          Date date = new Date();
+          SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+          String date_Str = f.format(date);
+          statement.setTimeStamp(date_Str);
+          statement.setReporter(user.getAccount());
           statementMapper.createStatement(statement);
+          System.out.println("++++++++++++");
       }catch (Exception e) {
           return new Result(false,e.getMessage());
       }

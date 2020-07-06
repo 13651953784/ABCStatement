@@ -35,9 +35,9 @@ public class StatementController {
         return statementService.retrieveStatementListBySingleDate(singleDate,currentPage,pageSize);
     }
 //新增
-    @PostMapping("")
+    @PostMapping("/add")
     Result createStatement(@RequestBody Statement statement){
-
+        System.out.println("#######@PostMapping(\"/add\")######");
         return statementService.createStatement(statement);
     }
 }

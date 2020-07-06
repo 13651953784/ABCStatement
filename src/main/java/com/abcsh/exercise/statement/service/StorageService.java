@@ -19,9 +19,10 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-@Service
+//@Service
 public class StorageService {
 
     private final Path rootLocation;
@@ -32,7 +33,7 @@ public class StorageService {
     }
 
 
-    public Result store(MultipartFile file) {
+    public Result store(@RequestParam("attachment") MultipartFile file) {
         String filename = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         try {
 
@@ -52,12 +53,11 @@ public class StorageService {
                 Files.copy(inputStream, this.rootLocation.resolve(filename),
                         StandardCopyOption.REPLACE_EXISTING);
             }
-        }
-        catch (IOException e) {
-            return new Result(false,e.getMessage());
+        } catch (IOException e) {
+            return new Result(false, e.getMessage());
         }
 
-        return new Result(true,file.getOriginalFilename() );
+        return new Result(true, file.getOriginalFilename());
     }
 
 
@@ -66,8 +66,7 @@ public class StorageService {
             return Files.walk(this.rootLocation, 1)
                     .filter(path -> !path.equals(this.rootLocation))
                     .map(this.rootLocation::relativize);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new StorageException("Failed to read stored files", e);
         }
 
@@ -84,14 +83,12 @@ public class StorageService {
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return resource;
-            }
-            else {
+            } else {
                 throw new StorageException(
                         "Could not read file: " + filename);
 
             }
-        }
-        catch (MalformedURLException e) {
+        } catch (MalformedURLException e) {
             throw new StorageException("Could not read file: " + filename, e);
         }
     }
@@ -102,18 +99,17 @@ public class StorageService {
         try {
             FileSystemUtils.deleteRecursively(rootLocation.toFile());
         } catch (Exception e) {
-            return new Result(false,e.getMessage());
+            return new Result(false, e.getMessage());
         }
 
-        return new Result(true,"");
+        return new Result(true, "");
     }
 
 
     public void init() {
         try {
             Files.createDirectories(rootLocation);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new StorageException("Could not initialize storage", e);
         }
     }
