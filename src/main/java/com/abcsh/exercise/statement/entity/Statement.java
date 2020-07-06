@@ -73,4 +73,17 @@ public class Statement {
     public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
     }
+
+    @Override
+    public String toString() {
+        return "Statement{" +
+                "id=" + id +
+                ", date='" + date + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", attachment='" + attachment + '\'' +
+                ", reporter='" + reporter + '\'' +
+                ", timeStamp=" + timeStamp +
+                '}';
+    }
 }

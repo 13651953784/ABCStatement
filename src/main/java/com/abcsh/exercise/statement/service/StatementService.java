@@ -57,6 +57,7 @@ public class StatementService {
     public Result createStatement(Statement statement) {
       try {
           User user = (User) request.getSession().getAttribute("user");
+          System.out.println("1*****************"+statement);
           if (null != user) {
               Date date = new Date();
               SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -65,6 +66,7 @@ public class StatementService {
 
               statement.setTimeStamp(new Date(date_Str));
               statement.setReporter(user.getAccount());
+              System.out.println("2*****************"+statement);
           }
           statementMapper.createStatement(statement);
       }catch (Exception e) {

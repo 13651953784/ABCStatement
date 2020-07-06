@@ -1,17 +1,11 @@
 package com.abcsh.exercise.statement.entity;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
-/**
- * @program: Statement
- * @description: ......
- * @author: 乘梦碧溪
- * @create: 2020-06-22 14:01
- **/
 @ConfigurationProperties("storage")
-public class StorageProperties {
-    private String location;
+public class StorageProperties{
+
+    private String location = "upload-dir";
 
     public String getLocation() {
         return location;
@@ -20,4 +14,5 @@ public class StorageProperties {
     public void setLocation(String location) {
         this.location = location;
     }
+
 }
