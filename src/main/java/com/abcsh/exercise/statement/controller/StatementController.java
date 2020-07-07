@@ -38,6 +38,17 @@ public class StatementController {
     @PostMapping("/add")
     Result createStatement(@RequestBody Statement statement){
         System.out.println("#######@PostMapping(\"/add\")######");
+        System.out.println(statement.toString());
         return statementService.createStatement(statement);
+    }
+//删除，即为更新
+    @PostMapping("/delete")
+    Result deleteStatementById(@RequestParam int id){
+        return statementService.deleteStatementById(id);
+    }
+//编辑,即为更新,即为新增
+    @PostMapping("/edit")
+    Result editById(){
+        return null;
     }
 }

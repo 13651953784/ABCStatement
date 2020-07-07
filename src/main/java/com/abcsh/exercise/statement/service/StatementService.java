@@ -48,7 +48,7 @@ public class StatementService {
         );
     }
 
-    //按id查询返回Statementr
+    //按id查询返回Statement
     public Statement retrieveStatementById(int id){
         return statementMapper.retrieveStatementById(id);
     }
@@ -71,8 +71,10 @@ public class StatementService {
     }
 
     //删除
-    void deleteStatementById(int id) {
+   public Result deleteStatementById(int id) {
+
         statementMapper.deleteStatementById(id);
+        return new Result(true,"");
     }
 
     //更新

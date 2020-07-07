@@ -22,7 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-//@Service
+@Service
 public class StorageService {
 
     private final Path rootLocation;
@@ -33,7 +33,7 @@ public class StorageService {
     }
 
 
-    public Result store(@RequestParam("attachment") MultipartFile file) {
+    public Result store(MultipartFile file) {
         String filename = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         try {
 
