@@ -32,11 +32,9 @@ public class StorageService {
         this.rootLocation = Paths.get(properties.getLocation());
     }
 
-
     public Result store(MultipartFile file) {
         String filename = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         try {
-
             if (file.isEmpty()) {
                 return new Result(false, "Failed to store empty file "
                         + filename);
