@@ -78,8 +78,13 @@ public class StatementService {
     }
 
     //更新
-    void updateStatementById(int id) {
-        statementMapper.updateStatementById(id);
+    public Result updateStatementById(int id) {
+        try{
+            statementMapper.updateStatementById(id);
+        }catch (Exception e){
+            return new Result(false,e.getMessage());
+        }
+        return new Result(true,"");
     }
 
 

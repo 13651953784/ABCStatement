@@ -48,7 +48,7 @@ public class StatementController {
     }
 //编辑,即为更新,即为新增
     @PostMapping("/edit")
-    Result editById(){
-        return null;
+    Result editById(@RequestParam int id){
+        return statementService.updateStatementById(id);
     }
 }
