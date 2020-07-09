@@ -14,6 +14,7 @@ import com.abcsh.exercise.statement.entity.Result;
 import com.abcsh.exercise.statement.entity.StorageProperties;
 import com.abcsh.exercise.statement.exception.StorageException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;

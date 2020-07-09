@@ -10,9 +10,6 @@ import org.springframework.context.annotation.*;
 public class StatementApplication {
 
 	public static void main(String[] args) {
-
-
 		SpringApplication.run(StatementApplication.class, args);
 	}
-
 }
