@@ -27,8 +27,12 @@ public class StatementService {
     StatementMapper statementMapper;
     @Autowired
     HttpServletRequest request;
+//查询所有
+    public PagingResult retrieveAllStatementList(int currentPage,int pageSize){
 
-    //起止时间查询
+        return null;
+    }
+//起止时间查询
     public PagingResult retrieveStatementListByRangeDate(String beginDate,String overDate,int currentPage,int pageSize){
         List<?> list = statementMapper.retrieveStatementListByRangeDate( beginDate, overDate, Paging.toStart(currentPage,pageSize),pageSize);
         System.out.println("***************retrieveStatementListByRangeDate*******************" + new Date());
@@ -60,8 +64,10 @@ public class StatementService {
           Date date = new Date();
           SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
           String date_Str = f.format(date);
+
           statement.setTimeStamp(date_Str);
           statement.setReporter(user.getAccount());
+          System.out.println(">>>>>>>>>>>>>statement:"+statement);
           statementMapper.createStatement(statement);
           System.out.println("++++++++++++");
       }catch (Exception e) {

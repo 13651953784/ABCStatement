@@ -93,6 +93,8 @@ public class StorageService {
     }
 
 
+
+
     public Result deleteAll() {
 
         try {
@@ -102,6 +104,9 @@ public class StorageService {
         }
 
         return new Result(true, "");
+    }
+    public Result deleteBy(){
+        return null;
     }
 
 

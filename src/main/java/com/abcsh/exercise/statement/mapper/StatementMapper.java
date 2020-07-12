@@ -8,7 +8,7 @@ import java.util.List;
 @Repository
 public interface StatementMapper {
     //
-    //List<?> retrieveStatementList(String userName,int start,int limit);
+    List<?> retrieveAllStatementList(int start,int limit);
     //起始时间查询
     List<?> retrieveStatementListByRangeDate(String beginDate,String overDate,int start,int limit);
     //单日查询
