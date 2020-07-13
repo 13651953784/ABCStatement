@@ -26,6 +26,7 @@ public class StatementController {
     @GetMapping("/findAll")
     PagingResult retrieveAllStatementList(@RequestParam int currentPage,
                                           @RequestParam int pageSize){
+        System.out.println(">>>>>>>>findAll<<<<<<<<<<");
         return statementService.retrieveAllStatementList(currentPage,pageSize);
     }
 //起始日期查询
@@ -59,8 +60,9 @@ public class StatementController {
         return statementService.deleteStatementById(id);
     }
 //编辑,即为更新,即为新增
-    @PostMapping("/edit")
-    Result editById(@RequestParam int id){
+    @PostMapping("/update")
+    Result updateStatementById(@RequestParam int id){
+        Statement statement = statementService.retrieveStatementById(id);
         return statementService.updateStatementById(id);
     }
 }

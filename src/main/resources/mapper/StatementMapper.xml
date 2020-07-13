@@ -51,7 +51,7 @@
         select found_rows() as count;
     </select>
 
-<!--精确查询-->
+<!--单日查询-->
     <select id="retrieveStatementListBySingleDate" resultMap="statementMap,countMap" parameterType="String">
         select sql_calc_found_rows
             a.id,

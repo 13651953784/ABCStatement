@@ -29,8 +29,11 @@ public class StatementService {
     HttpServletRequest request;
 //查询所有
     public PagingResult retrieveAllStatementList(int currentPage,int pageSize){
-
-        return null;
+        List<?> list = statementMapper.retrieveAllStatementList(Paging.toStart(currentPage,pageSize),pageSize);
+        return new PagingResult<>(
+                ((List<Integer>)list.get(1)).get(0)
+                ,(List<Statement>)list.get(0)
+        );
     }
 //起止时间查询
     public PagingResult retrieveStatementListByRangeDate(String beginDate,String overDate,int currentPage,int pageSize){
@@ -41,8 +44,7 @@ public class StatementService {
                 ,(List<Statement>)list.get(0)
         );
     }
-
-    //单日时间查询
+//单日时间查询
     public PagingResult retrieveStatementListBySingleDate(String singleDate,int currentPage,int pageSize){
         List<?> list = statementMapper.retrieveStatementListBySingleDate(singleDate,Paging.toStart(currentPage,pageSize),pageSize);
         System.out.println("***************retrieveStatementListBySingleDate*******************" + new Date());
@@ -52,12 +54,12 @@ public class StatementService {
         );
     }
 
-    //按id查询返回Statement
+//按id查询返回Statement
     public Statement retrieveStatementById(int id){
         return statementMapper.retrieveStatementById(id);
     }
 
-    //新增
+//新增
     public Result createStatement(Statement statement) {
       try {
           User user = (User) request.getSession().getAttribute("user");
@@ -76,14 +78,13 @@ public class StatementService {
       return new Result(true,"");
     }
 
-    //删除
+//删除
    public Result deleteStatementById(int id) {
-
         statementMapper.deleteStatementById(id);
         return new Result(true,"");
     }
 
-    //更新
+//更新
     public Result updateStatementById(int id) {
         try{
             statementMapper.updateStatementById(id);
