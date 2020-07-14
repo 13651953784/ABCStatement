@@ -60,9 +60,12 @@ public class StatementController {
         return statementService.deleteStatementById(id);
     }
 //编辑,即为更新,即为新增
-    @PostMapping("/update")
-    Result updateStatementById(@RequestParam int id){
-        Statement statement = statementService.retrieveStatementById(id);
+    @RequestMapping(value="/update{rowId}",method=RequestMethod.POST)
+    Result updateStatementById(@RequestParam int id,
+                               @RequestBody Statement statement
+    ){
+        //Statement statement = statementService.retrieveStatementById(id);
+        System.out.println(">>>>>>>>>>>正在执行更新Controller操作...");
         return statementService.updateStatementById(id);
     }
 }
