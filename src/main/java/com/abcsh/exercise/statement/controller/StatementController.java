@@ -61,11 +61,12 @@ public class StatementController {
     }
 //编辑,即为更新,即为新增
     @RequestMapping(value="/update{rowId}",method=RequestMethod.POST)
-    Result updateStatementById(@RequestParam int id,
+    Result updateStatementById(@RequestParam String rowId,
                                @RequestBody Statement statement
     ){
         //Statement statement = statementService.retrieveStatementById(id);
+        int id = Integer.parseInt(rowId);
         System.out.println(">>>>>>>>>>>正在执行更新Controller操作...");
-        return statementService.updateStatementById(id);
+        return statementService.updateStatementById(id,statement);
     }
 }

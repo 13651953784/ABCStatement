@@ -1,5 +1,6 @@
 package com.abcsh.exercise.statement.mapper;
 
+import com.abcsh.exercise.statement.entity.Result;
 import com.abcsh.exercise.statement.entity.Statement;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +19,7 @@ public interface StatementMapper {
     //新增
     void createStatement(Statement statement);
     //删除
-    void deleteStatementById(int id);
+    Result deleteStatementById(int id);
     //更新
-    void updateStatementById(int id);
+    Result updateStatementById(int id, Statement statement);
 }

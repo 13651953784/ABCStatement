@@ -113,15 +113,16 @@
         delete from statement where id = #{id}
     </delete>
 <!--编辑-->
-    <update id="updateStatementById" parameterType="com.abcsh.exercise.statement.entity.Statement">
+    <update id="updateStatementById" parameterType="com.abcsh.exercise.statement.entity.Statement"  useGeneratedKeys="true" keyProperty="id">
         update statement
         <trim prefix="set" suffixOverrides=",">
             <if test="date != null">date = #{date},</if>
-            <if test="title != null">date = #{title},</if>
-            <if test="content != null">date = #{content},</if>
-            <if test="attachment != null">date = #{attachment},</if>
-            <if test="reporter != null">date = #{reporter}</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="attachment != null">attachment = #{attachment},</if>
+            <!--<if test="reporter != null">reporter = #{reporter}</if>-->
         </trim>
+        where id = #{id}
     </update>
 
 

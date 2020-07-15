@@ -87,10 +87,15 @@ public class StatementService {
 //更新
     public Result updateStatementById(int id,Statement statement) {
         try{
-            statementMapper.updateStatementById(id,);
+            Statement statement1 = this.retrieveStatementById(id);
+            statement.setReporter(statement1.getReporter());
+            statement.setTimeStamp(statement.getTimeStamp());
+            statementMapper.updateStatementById(id,statement);
+
         }catch (Exception e){
             return new Result(false,e.getMessage());
         }
+        System.out.println("~~~~~~~~~~~~更新操作已执行完毕！");
         return new Result(true,"");
     }
 
