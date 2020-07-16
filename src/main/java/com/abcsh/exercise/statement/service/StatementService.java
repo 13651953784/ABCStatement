@@ -80,23 +80,26 @@ public class StatementService {
 
 //删除
    public Result deleteStatementById(int id) {
-        statementMapper.deleteStatementById(id);
-        return new Result(true,"");
+       // return statementMapper.deleteStatementById(id);
+       if (statementMapper.deleteStatementById(id))
+            return new Result(true,"");
+       else
+           return new Result(false,"删除错误！");
     }
 
 //更新
-    public Result updateStatementById(int id,Statement statement) {
-        try{
-            Statement statement1 = this.retrieveStatementById(id);
-            statement.setReporter(statement1.getReporter());
-            statement.setTimeStamp(statement.getTimeStamp());
-            statementMapper.updateStatementById(id,statement);
+    public Result updateStatementById(Statement statement) {
 
-        }catch (Exception e){
-            return new Result(false,e.getMessage());
-        }
+            //Statement statement1 = this.retrieveStatementById(id);
+            //statement.setReporter(statement1.getReporter());
+            //statement.setTimeStamp(statement.getTimeStamp());
+
         System.out.println("~~~~~~~~~~~~更新操作已执行完毕！");
-        return new Result(true,"");
+        boolean flag = statementMapper.updateStatementById(statement);
+        if (flag)
+            return new Result(true,"");
+        else
+            return new Result(false,"更新出错！");
     }
 
 

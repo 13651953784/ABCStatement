@@ -119,7 +119,7 @@
             <if test="date != null">date = #{date},</if>
             <if test="title != null">title = #{title},</if>
             <if test="content != null">content = #{content},</if>
-            <if test="attachment != null">attachment = #{attachment},</if>
+            <if test="attachment != null">attachment = #{attachment}</if>
             <!--<if test="reporter != null">reporter = #{reporter}</if>-->
         </trim>
         where id = #{id}

@@ -2,6 +2,7 @@ package com.abcsh.exercise.statement.mapper;
 
 import com.abcsh.exercise.statement.entity.Result;
 import com.abcsh.exercise.statement.entity.Statement;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface StatementMapper {
     //新增
     void createStatement(Statement statement);
     //删除
-    Result deleteStatementById(int id);
+    boolean deleteStatementById(int id);
     //更新
-    Result updateStatementById(int id, Statement statement);
+    boolean updateStatementById(Statement statement);
 }
